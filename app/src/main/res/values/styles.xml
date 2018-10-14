@@ -71,8 +71,6 @@
     <style name="appBar" parent="Widget.Design.TabLayout">
         <item name="tabIndicatorColor">@color/color_tab_text</item>
         <item name="tabIndicatorHeight">2dp</item>
-        <item name="tabPaddingStart">4dp</item>
-        <item name="tabPaddingEnd">4dp</item>
         <item name="tabBackground">?attr/selectableItemBackground</item>
         <item name="tabSelectedTextColor">@color/color_section</item>
     </style>
