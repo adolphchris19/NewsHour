@@ -1,6 +1,7 @@
-package com.adolphchris.android.newshour;
+package com.adolphchris.android.newshour.UI;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
@@ -17,11 +18,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.adolphchris.android.newshour.Adapter.ViewPagerAdapter;
+import com.adolphchris.android.newshour.R;
+import com.adolphchris.android.newshour.Utils.Constants;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    TabLayout tabLayout;
+    private ViewPager viewPager;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,14 +35,27 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
 
+        // Find the view pager that will allow the user to swipe between fragments
+        viewPager = findViewById(R.id.viewPager);
 
-        /** ViewPager  ViewPager Adapter*/
-
-        ViewPager viewPager = findViewById(R.id.viewPager);
-        ViewPagerAdapter adapter = new ViewPagerAdapter(this, getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
+        // Give the TabLayout the ViewPager
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        // Set gravity for tab bar
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        assert navigationView != null;
+        navigationView.setNavigationItemSelectedListener(this);
+
+        // Set the default fragment when starting the app
+        onNavigationItemSelected(navigationView.getMenu().getItem(0).setChecked(true));
+
+        // Set category fragment pager adapter
+        ViewPagerAdapter pagerAdapter =
+                new ViewPagerAdapter(this, getSupportFragmentManager());
+        // Set the pager adapter onto the view pager
+        viewPager.setAdapter(pagerAdapter);
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -47,8 +64,6 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override
@@ -85,26 +100,27 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_home) {
-            // Handle the camera action
+            viewPager.setCurrentItem(Constants.HOME);
         } else if (id == R.id.nav_world) {
-
+            viewPager.setCurrentItem(Constants.WORLD);
         } else if (id == R.id.nav_business) {
-
+            viewPager.setCurrentItem(Constants.BUSINESS);
         } else if (id == R.id.nav_science) {
-
+            viewPager.setCurrentItem(Constants.SCIENCE);
         } else if (id == R.id.nav_sports) {
-
+            viewPager.setCurrentItem(Constants.SPORTS);
         } else if (id == R.id.nav_fashion) {
-
+            viewPager.setCurrentItem(Constants.FASHION);
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 }
+
