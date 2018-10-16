@@ -135,7 +135,7 @@ public class BusinessUtils { private static final String TAG = BusinessUtils.cla
                 newsFeeds.add(newsFeed);
             }
         } catch (JSONException e) {
-            Log.e("TechUtils", "Problem parsing  NewsFeed JSON result", e);
+            Log.e("BusinessUtils", "Problem parsing  NewsFeed JSON result", e);
         }
         return newsFeeds;
     }

@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.adolphchris.android.newshour.Adapter.NewsFeedAdapter;
+import com.adolphchris.android.newshour.Loaders.BusinessLoader;
 import com.adolphchris.android.newshour.Loaders.SportsLoader;
 import com.adolphchris.android.newshour.R;
 import com.adolphchris.android.newshour.UI.NewsFeed;
@@ -37,7 +38,7 @@ public class Business extends Fragment implements LoaderManager.LoaderCallbacks<
 
     private NewsFeedAdapter mAdapter;
     private static int LOADER_ID = 0;
-    public static final String LOG_TAG = Sports.class.getName();
+    public static final String LOG_TAG = Business.class.getName();
 
     public Business() {
     }
@@ -81,13 +82,13 @@ public class Business extends Fragment implements LoaderManager.LoaderCallbacks<
 
     @Override
     public Loader<List<NewsFeed>> onCreateLoader(int id, Bundle args) {
-        Log.i(LOG_TAG, "TEST: SportFragment onCreateLoader is called");
-        return new SportsLoader(getActivity());
+        Log.i(LOG_TAG, "TEST: BusinessFragment onCreateLoader is called");
+        return new BusinessLoader(getActivity());
     }
 
     @Override
     public void onLoadFinished(Loader<List<NewsFeed>> loader, List<NewsFeed> data) {
-        Log.i(LOG_TAG, "TEST: SportFragment onLoaderFinished is called");
+        Log.i(LOG_TAG, "TEST: BusinessFragment onLoaderFinished is called");
         loadingIndicator = getView().findViewById(R.id.progressBar);
         loadingIndicator.setVisibility(View.GONE);
         mAdapter.clear();
@@ -97,7 +98,7 @@ public class Business extends Fragment implements LoaderManager.LoaderCallbacks<
 
     @Override
     public void onLoaderReset(Loader<List<NewsFeed>> loader) {
-        Log.i(LOG_TAG, "TEST: SportFragment onLoaderReset is called");
+        Log.i(LOG_TAG, "TEST: BusinessFragment onLoaderReset is called");
         mAdapter.clear();
     }
 }
